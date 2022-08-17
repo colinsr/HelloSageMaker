@@ -18,4 +18,6 @@ ENV PATH="/opt/program:${PATH}"
 
 # Copy the directory 'script' which contains our script file to the /opt/program directory of the image.
 COPY Files /opt/program
+RUN mkdir -p /opt/ml/model
+COPY Model/hello-world-model.pkl /opt/ml/model
 WORKDIR /opt/program
