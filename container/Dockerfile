@@ -1,15 +1,21 @@
-FROM python:3.6
+FROM python:3.6-alpine
 
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
-         wget \
-         python \
+RUN apk update
+RUN apk --no-cache add wget \
+        #  python \
          nginx \
-         ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+         ca-certificates
+
+# RUN apt-get -y update && apt-get install -y --no-install-recommends \
+#          wget \
+#          python \
+#          nginx \
+#          ca-certificates \
+#     && rm -rf /var/lib/apt/lists/*
 
 
 RUN wget https://bootstrap.pypa.io/pip/3.6/get-pip.py && python get-pip.py && \
-    pip3 install numpy==1.16.2 flask gevent gunicorn pandas dill
+    pip3 install flask gevent gunicorn dill
       
         
 ENV PYTHONUNBUFFERED=TRUE
